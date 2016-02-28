@@ -41,6 +41,6 @@ providers.route('/providers/:provider')
 app.use('/api', providers);
 
 // Start Server
-app.listen(3002, function(){
-	console.log("Server runing on http://localhost:3002");
+app.listen(3004, function(){
+	console.log("Server runing on http://localhost:3004");
 })
