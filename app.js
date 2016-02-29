@@ -5,7 +5,7 @@ var express        = require("express"),
     mongoose       = require('mongoose');
 
 // Connection to DB
-mongoose.connect('mongodb://localhost/providers', function(err, res) {
+mongoose.connect('mongodb://10.1.1.110/providers', function(err, res) {
   if(err) throw err;
   console.log('Connected to Database');
 });
@@ -41,6 +41,6 @@ providers.route('/providers/:provider')
 app.use('/api', providers);
 
 // Start Server
-app.listen(3004, function(){
-	console.log("Server runing on http://localhost:3004");
+app.listen(3003, function(){
+	console.log("Server runing on http://localhost:3003");
 })
