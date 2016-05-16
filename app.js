@@ -5,7 +5,7 @@ var express        = require("express"),
     mongoose       = require('mongoose');
 
 // Connection to DB
-mongoose.connect('mongodb://10.1.1.110/providers', function(err, res) {
+mongoose.connect('mongodb://localhost:27017/providers', function(err, res) {
   if(err) throw err;
   console.log('Connected to Database');
 });
@@ -37,6 +37,9 @@ providers.route('/providers/:provider')
 	.get(ProvidersCtrl.findByName)
 	.put(ProvidersCtrl.updateProviders)
 	.delete(ProvidersCtrl.deleteProviders);
+
+providers.route('/predict')
+  .post(ProvidersCtrl.postPredict);
 
 app.use('/api', providers);
 

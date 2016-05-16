@@ -75,3 +75,88 @@ exports.deleteProviders = function(req, res) {
         })
     });
 };
+
+// We need this to build our post string
+var querystring = require('querystring');
+var http = require('http');
+var fs = require('fs');
+
+function PostCode(codestring) {
+  // Build the post string from an object
+  var post_data = JSON.stringify(
+    [
+        ["Akita",56.9,38,7,13.5],
+        ["Golden Retriever",99,47.7,51.6,20.7],
+        ["German Shepherd",109.4,35.4,68.7,12],
+        ["Boxer",145.4,29.4,42.8,15.8],
+        ["Pug",58.4,40,78,42.5],
+        ["Rottweiler",45.5,33.2,84,15],
+        ["Siberian Husky",168.5,52.7,11.8,38.4],
+        ["Dalmatian",57.5,40.4,212.3,15.7],
+        ["Beagle",161.81,38.07,24.78,40.03],
+        ["Chow Chow",154.60,35.51,14.67,42.53]
+   ]
+  );
+
+  // An object of options to indicate where to post to
+  var post_options = {
+      host: 'https://localhost',
+      port: '9443',
+      path: '/api/models/11/predict',
+      json: true,
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: post_data
+  };
+
+  // Set up the request
+  var post_req = http.request(post_options, function(res) {
+      res.setEncoding('utf8');
+      res.on('data', function (chunk) {
+          console.log('Response: ' + chunk);
+      });
+  });
+
+
+}
+
+exports.postPredict = function(req, res) {  
+    // Build the post string from an object
+  var post_data = JSON.stringify(
+    [
+        ["Akita",56.9,38,7,13.5],
+        ["Golden Retriever",99,47.7,51.6,20.7],
+        ["German Shepherd",109.4,35.4,68.7,12],
+        ["Boxer",145.4,29.4,42.8,15.8],
+        ["Pug",58.4,40,78,42.5],
+        ["Rottweiler",45.5,33.2,84,15],
+        ["Siberian Husky",168.5,52.7,11.8,38.4],
+        ["Dalmatian",57.5,40.4,212.3,15.7],
+        ["Beagle",161.81,38.07,24.78,40.03],
+        ["Chow Chow",154.60,35.51,14.67,42.53]
+   ]
+  );
+
+  // An object of options to indicate where to post to
+  var post_options = {
+      host: 'https://localhost',
+      port: '9443',
+      path: '/api/models/11/predict',
+      json: true,
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: post_data
+  };
+
+  // Set up the request
+  var post_req = http.request(post_options, function(res) {
+      res.setEncoding('utf8');
+      res.on('data', function (chunk) {
+          console.log('Response: ' + chunk);
+      });
+  });    
+};
