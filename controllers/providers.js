@@ -90,18 +90,7 @@ exports.postPredict = function(req, res) {
     request({
         url: 'https://ec2-52-36-54-240.us-west-2.compute.amazonaws.com:9443/api/models/11/predict', //URL to hit
         method: 'POST',
-        json: [
-            ["Akita",56.9,38,7,13.5],
-            ["Golden Retriever",99,47.7,51.6,20.7],
-            ["German Shepherd",109.4,35.4,68.7,12],
-            ["Boxer",145.4,29.4,42.8,15.8],
-            ["Pug",58.4,40,78,42.5],
-            ["Rottweiler",45.5,33.2,84,15],
-            ["Siberian Husky",168.5,52.7,11.8,38.4],
-            ["Dalmatian",57.5,40.4,212.3,15.7],
-            ["Beagle",161.81,38.07,24.78,40.03],
-            ["Chow Chow",154.60,35.51,14.67,42.53]
-       ],
+        json: req.body,
         auth: {
             user: 'admin',
             password: 'admin'
@@ -112,7 +101,7 @@ exports.postPredict = function(req, res) {
 
         }
     }, function(err, response, body){
-        if(err) res.status(200);
+        if(err) console.log(err);
         console.log(response.statusCode, body);
         res.status(200).jsonp(body);
     });
