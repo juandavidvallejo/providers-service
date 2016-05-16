@@ -112,7 +112,7 @@ exports.postPredict = function(req, res) {
 
         }
     }, function(err, response, body){
-        if(err) console.log(err);
+        if(err) res.status(200);
         console.log(response.statusCode, body);
         res.status(200).jsonp(body);
     });
