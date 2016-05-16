@@ -86,43 +86,11 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 var request = require('request');
 
 exports.postPredict = function(req, res) {  
-    // Build the post string from an object
-  var post_data = JSON.stringify(
-    [
-        ["Akita",56.9,38,7,13.5],
-        ["Golden Retriever",99,47.7,51.6,20.7],
-        ["German Shepherd",109.4,35.4,68.7,12],
-        ["Boxer",145.4,29.4,42.8,15.8],
-        ["Pug",58.4,40,78,42.5],
-        ["Rottweiler",45.5,33.2,84,15],
-        ["Siberian Husky",168.5,52.7,11.8,38.4],
-        ["Dalmatian",57.5,40.4,212.3,15.7],
-        ["Beagle",161.81,38.07,24.78,40.03],
-        ["Chow Chow",154.60,35.51,14.67,42.53]
-   ]
-  );
-
-  // An object of options to indicate where to post to
-  var post_options = {
-      host: 'https://ec2-52-36-54-240.us-west-2.compute.amazonaws.com',
-      port: '9443',
-      path: '/api/models/11/predict',
-      json: true,
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: post_data,
-      auth: {
-        user: 'admin',
-        password: 'admin'
-      }
-  };
-
   //Lets configure and request
     request({
         url: 'https://ec2-52-36-54-240.us-west-2.compute.amazonaws.com:9443/api/models/11/predict', //URL to hit
-        qs:[
+        method: 'POST',
+        json: [
             ["Akita",56.9,38,7,13.5],
             ["Golden Retriever",99,47.7,51.6,20.7],
             ["German Shepherd",109.4,35.4,68.7,12],
@@ -133,15 +101,15 @@ exports.postPredict = function(req, res) {
             ["Dalmatian",57.5,40.4,212.3,15.7],
             ["Beagle",161.81,38.07,24.78,40.03],
             ["Chow Chow",154.60,35.51,14.67,42.53]
-       ], //Query string data
-        method: 'POST',
-        json: true,
+       ],
         auth: {
             user: 'admin',
             password: 'admin'
           },
         headers: {
               'Content-Type': 'application/json',
+              'host': 'ec2-52-36-54-240.us-west-2.compute.amazonaws.com',
+
         }
     }, function(err, response, body){
         if(err) console.log(err);
