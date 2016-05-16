@@ -44,7 +44,7 @@ providers.route('/providers/:provider')
 	.put(ProvidersCtrl.updateProviders)
 	.delete(ProvidersCtrl.deleteProviders);
 
-providers.route('/predict')
+providers.route('/predict/:model')
   .post(ProvidersCtrl.postPredict);
 
 app.use('/api', providers);

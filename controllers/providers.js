@@ -86,9 +86,10 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 var request = require('request');
 
 exports.postPredict = function(req, res) {  
+    model_id = req.params.model
   //Lets configure and request
     request({
-        url: 'https://ec2-52-36-54-240.us-west-2.compute.amazonaws.com:9443/api/models/11/predict', //URL to hit
+        url: 'https://ec2-52-36-54-240.us-west-2.compute.amazonaws.com:9443/api/models/'+ model_id +'/predict', //URL to hit
         method: 'POST',
         json: req.body,
         auth: {
